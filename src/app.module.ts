@@ -6,6 +6,8 @@ import { SpecialtiesModule } from './specialties/specialties.module';
 import { CategoriesModule } from './categories/categories.module';
 import { SubcategoriesModule } from './subcategories/subcategories.module';
 import { IndustriesModule } from './industries/industries.module';
+import { OrganizationsModule } from './organizations/organizations.module';
+import { ProjectLeadersModule } from './projectLeaders/projectLeaders.module';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -23,6 +25,8 @@ console.log('process.env.MONGODB_CONNECTION_STRING');
     CategoriesModule,
     SubcategoriesModule,
     IndustriesModule,
+    OrganizationsModule,
+    ProjectLeadersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

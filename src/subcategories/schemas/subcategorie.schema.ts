@@ -10,6 +10,9 @@ export class Subcategorie {
 
   @Prop()
   name: string;
+
+  @Prop()
+  categorieId: number;
 }
 
 export const SubcategorieSchema = SchemaFactory.createForClass(Subcategorie);
