@@ -1,44 +1,26 @@
-import { Injectable } from '@nestjs/common';
+import { Logger, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateCategorieDto } from './dto/create-categorie.dto';
-import { UpdateCategorieDto } from './dto/update-categorie.dto';
 import { Categorie } from './schemas/categorie.schema';
 
 @Injectable()
 export class CategoriesService {
+  private readonly logger = new Logger(CategoriesService.name);
+
   constructor(
     @InjectModel(Categorie.name)
     private readonly categorieModel: Model<Categorie>,
   ) {}
 
-  async create(createCategorieDto: CreateCategorieDto): Promise<Categorie> {
-    const createdCategorie =
-      await this.categorieModel.create(createCategorieDto);
-    return createdCategorie;
-  }
-
   async findAll(): Promise<Categorie[]> {
+    this.logger.log('Called find all');
+
     return this.categorieModel.find().exec();
   }
 
   async findOne(id: number): Promise<Categorie | null> {
+    this.logger.log('Called find single');
+
     return this.categorieModel.findOne({ id }).exec();
-  }
-
-  async update(
-    id: number,
-    updateCategorieDto: UpdateCategorieDto,
-  ): Promise<Categorie | null> {
-    return this.categorieModel
-      .findByIdAndUpdate({ id }, updateCategorieDto, { new: true })
-      .exec();
-  }
-
-  async delete(id: number): Promise<Categorie | null> {
-    const deletedCategorie = await this.categorieModel
-      .findByIdAndDelete({ id })
-      .exec();
-    return deletedCategorie;
   }
 }

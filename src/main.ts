@@ -1,20 +1,31 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import { VersioningType } from '@nestjs/common';
+import { ConsoleLogger, VersioningType } from '@nestjs/common';
+import helmet from 'helmet';
+
+/* TODOS:
+- Add CSRF
+*/
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: new ConsoleLogger({
+      prefix: 'Buscar Proyectos API',
+      logLevels: ['log', 'fatal', 'error', 'warn', 'debug', 'verbose'],
+    }),
+  });
 
   app.enableVersioning({
     type: VersioningType.URI,
   });
 
+  app.use(helmet());
+
   const config = new DocumentBuilder()
-    .setTitle('Cats example')
-    .setDescription('The cats API description')
+    .setTitle('Buscar proyectos API')
+    .setDescription('This API serves data related to projects')
     .setVersion('1.0')
-    .addTag('cats')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, documentFactory);
