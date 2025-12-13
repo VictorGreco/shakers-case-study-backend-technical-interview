@@ -3,9 +3,9 @@ import * as mongoose from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
-import { Organization } from 'src/organizations/schemas/organization.schema';
-import { ProjectLeader } from 'src/projectLeaders/schemas/projectLeader.schema';
-import { Position } from 'src/positions/schemas/position.schema';
+import { Organization } from '../../organizations/schemas/organization.schema';
+import { ProjectLeader } from '../../projectLeaders/schemas/projectLeader.schema';
+import { Position } from '../../positions/schemas/position.schema';
 import { Budget } from './budget.schema';
 import { Faq } from './faqs.schema';
 

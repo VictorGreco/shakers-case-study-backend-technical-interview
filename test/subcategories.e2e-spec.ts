@@ -1,0 +1,54 @@
+import { HttpStatus, INestApplication, VersioningType } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
+import request from 'supertest';
+import mongoose from 'mongoose';
+import { database, imports } from './constants';
+import { SubcategoriesModule } from '../src/subcategories/subcategories.module';
+
+beforeAll(async () => {
+  await mongoose.connect(database);
+});
+
+afterAll(async () => {
+  await mongoose.disconnect();
+});
+
+describe('SubcategoriesModule (e2e)', () => {
+  let app: INestApplication;
+
+  beforeEach(async () => {
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [...imports, SubcategoriesModule],
+    }).compile();
+
+    app = moduleFixture.createNestApplication();
+    app.enableVersioning({
+      type: VersioningType.URI,
+    });
+
+    await app.init();
+  });
+
+  it('Get all', () => {
+    return request(app.getHttpServer())
+      .get('/v1/subcategories')
+      .expect(({ body }) => {
+        expect(body).toHaveLength(150);
+      })
+      .expect(HttpStatus.OK);
+  });
+
+  it('Get one', () => {
+    return request(app.getHttpServer())
+      .get('/v1/subcategories/101')
+      .expect(({ body }) => {
+        expect(body).toMatchObject({
+          _id: '693c0e40f4d7ef84cd6a71f5',
+          id: 101,
+          name: 'Web Development (Frontend)',
+          categoryId: 1,
+        });
+      })
+      .expect(HttpStatus.OK);
+  });
+});

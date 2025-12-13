@@ -6,6 +6,7 @@ import helmet from 'helmet';
 
 /* TODOS:
 - Add CSRF
+- Add Unit testing and e2e
 */
 
 async function bootstrap() {
