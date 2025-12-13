@@ -4,23 +4,23 @@ import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { Project } from './schemas/project.schema';
 
-@Controller('projectss')
+@Controller('projects')
 export class ProjectsController {
-  constructor(private readonly projectssService: ProjectsService) {}
+  constructor(private readonly projectsService: ProjectsService) {}
 
   @Post()
   async create(@Body() createProjectsDto: CreateProjectDto) {
-    return this.projectssService.create(createProjectsDto);
+    return this.projectsService.create(createProjectsDto);
   }
 
   @Get()
   async findAll(): Promise<Project[]> {
-    return this.projectssService.findAll();
+    return this.projectsService.findAll();
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<Project | null> {
-    return this.projectssService.findOne(id);
+    return this.projectsService.findOne(id);
   }
 
   @Post(':id')
@@ -28,11 +28,11 @@ export class ProjectsController {
     @Param('id') id: string,
     @Body() updateProjectsDto: UpdateProjectDto,
   ) {
-    return this.projectssService.update(id, updateProjectsDto);
+    return this.projectsService.update(id, updateProjectsDto);
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string) {
-    return this.projectssService.delete(id);
+    return this.projectsService.delete(id);
   }
 }

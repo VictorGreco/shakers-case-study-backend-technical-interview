@@ -1,11 +1,13 @@
 import * as mongoose from 'mongoose';
 
-import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
 import { Organization } from 'src/organizations/schemas/organization.schema';
 import { ProjectLeader } from 'src/projectLeaders/schemas/projectLeader.schema';
 import { Position } from 'src/positions/schemas/position.schema';
+import { Budget } from './budget.schema';
+import { Faq } from './faqs.schema';
 
 export type ProjectDocument = HydratedDocument<Project>;
 
@@ -36,14 +38,8 @@ export class Project {
   @Prop()
   startDate: string;
 
-  @Prop(
-    raw({
-      hourFrom: { type: String },
-      hourTo: { type: String },
-      total: { type: String },
-    }),
-  )
-  budget: Record<string, number | null>;
+  @Prop({ type: Budget })
+  budget: Budget;
 
   @Prop()
   totalHours: number;
@@ -54,13 +50,8 @@ export class Project {
   @Prop([String])
   goals: string[];
 
-  @Prop([
-    raw({
-      question: { type: String },
-      answer: { type: String },
-    }),
-  ])
-  faqs: Record<string, string>[];
+  @Prop({ type: [Faq] })
+  faqs: Faq[];
 
   @Prop()
   status: string;

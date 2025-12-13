@@ -11,6 +11,8 @@ import { ProjectLeadersModule } from './projectLeaders/projectLeaders.module';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ProjectsModule } from './projects/projects.module';
+import { PositionsModule } from './positions/positions.module';
 
 console.log('process.env.MONGODB_CONNECTION_STRING');
 
@@ -27,6 +29,8 @@ console.log('process.env.MONGODB_CONNECTION_STRING');
     IndustriesModule,
     OrganizationsModule,
     ProjectLeadersModule,
+    PositionsModule,
+    ProjectsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

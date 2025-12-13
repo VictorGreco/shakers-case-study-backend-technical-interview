@@ -3,9 +3,9 @@ import { CreateProjectLeaderDto } from 'src/projectLeaders/dto/create-projectLea
 import { CreatePositionDto } from 'src/positions/dto/create-position.dto';
 
 export class CreateBudgetDto {
-  readonly hourFrom: number | null;
-  readonly hourTo: number | null;
-  readonly total: number | null;
+  readonly hourFrom: number;
+  readonly hourTo: number;
+  readonly total: number;
 }
 
 export class CreateFaqsDto {
