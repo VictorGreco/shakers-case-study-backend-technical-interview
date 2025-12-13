@@ -25,22 +25,22 @@ export class ProjectLeadersService {
     return this.projectLeaderModel.find().exec();
   }
 
-  async findOne(id: string): Promise<ProjectLeader | null> {
-    return this.projectLeaderModel.findOne({ _id: id }).exec();
+  async findOne(id: number): Promise<ProjectLeader | null> {
+    return this.projectLeaderModel.findOne({ id }).exec();
   }
 
   async update(
-    id: string,
+    id: number,
     updateProjectLeaderDto: UpdateProjectLeaderDto,
   ): Promise<ProjectLeader | null> {
     return this.projectLeaderModel
-      .findByIdAndUpdate({ _id: id }, updateProjectLeaderDto, { new: true })
+      .findByIdAndUpdate({ id }, updateProjectLeaderDto, { new: true })
       .exec();
   }
 
-  async delete(id: string): Promise<ProjectLeader | null> {
+  async delete(id: number): Promise<ProjectLeader | null> {
     const deletedProjectLeader = await this.projectLeaderModel
-      .findByIdAndDelete({ _id: id })
+      .findByIdAndDelete({ id })
       .exec();
     return deletedProjectLeader;
   }

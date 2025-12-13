@@ -22,22 +22,22 @@ export class CategoriesService {
     return this.categorieModel.find().exec();
   }
 
-  async findOne(id: string): Promise<Categorie | null> {
-    return this.categorieModel.findOne({ _id: id }).exec();
+  async findOne(id: number): Promise<Categorie | null> {
+    return this.categorieModel.findOne({ id }).exec();
   }
 
   async update(
-    id: string,
+    id: number,
     updateCategorieDto: UpdateCategorieDto,
   ): Promise<Categorie | null> {
     return this.categorieModel
-      .findByIdAndUpdate({ _id: id }, updateCategorieDto, { new: true })
+      .findByIdAndUpdate({ id }, updateCategorieDto, { new: true })
       .exec();
   }
 
-  async delete(id: string): Promise<Categorie | null> {
+  async delete(id: number): Promise<Categorie | null> {
     const deletedCategorie = await this.categorieModel
-      .findByIdAndDelete({ _id: id })
+      .findByIdAndDelete({ id })
       .exec();
     return deletedCategorie;
   }

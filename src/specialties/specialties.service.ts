@@ -22,22 +22,22 @@ export class SpecialtiesService {
     return this.specialtieModel.find().exec();
   }
 
-  async findOne(id: string): Promise<Specialtie | null> {
-    return this.specialtieModel.findOne({ _id: id }).exec();
+  async findOne(id: number): Promise<Specialtie | null> {
+    return this.specialtieModel.findOne({ id }).exec();
   }
 
   async update(
-    id: string,
+    id: number,
     updateSpecialtieDto: UpdateSpecialtieDto,
   ): Promise<Specialtie | null> {
     return this.specialtieModel
-      .findByIdAndUpdate({ _id: id }, updateSpecialtieDto, { new: true })
+      .findByIdAndUpdate({ id }, updateSpecialtieDto, { new: true })
       .exec();
   }
 
-  async delete(id: string): Promise<Specialtie | null> {
+  async delete(id: number): Promise<Specialtie | null> {
     const deletedSpecialtie = await this.specialtieModel
-      .findByIdAndDelete({ _id: id })
+      .findByIdAndDelete({ id })
       .exec();
     return deletedSpecialtie;
   }

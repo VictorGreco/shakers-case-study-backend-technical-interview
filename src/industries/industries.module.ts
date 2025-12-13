@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { IndustriesController } from './industries.controller';
+import { IndustriesControllerV1 } from './industries.controller';
 import { IndustriesService } from './industries.service';
 import { Industrie, IndustrieSchema } from './schemas/industrie.schema';
 
@@ -10,7 +10,7 @@ import { Industrie, IndustrieSchema } from './schemas/industrie.schema';
       { name: Industrie.name, schema: IndustrieSchema },
     ]),
   ],
-  controllers: [IndustriesController],
+  controllers: [IndustriesControllerV1],
   providers: [IndustriesService],
 })
 export class IndustriesModule {}

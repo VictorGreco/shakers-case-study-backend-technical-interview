@@ -14,8 +14,6 @@ import { AppService } from './app.service';
 import { ProjectsModule } from './projects/projects.module';
 import { PositionsModule } from './positions/positions.module';
 
-console.log('process.env.MONGODB_CONNECTION_STRING');
-
 @Module({
   imports: [
     ConfigModule.forRoot({

@@ -21,22 +21,22 @@ export class PositionsService {
     return this.positionModel.find().exec();
   }
 
-  async findOne(id: string): Promise<Position | null> {
-    return this.positionModel.findOne({ _id: id }).exec();
+  async findOne(id: number): Promise<Position | null> {
+    return this.positionModel.findOne({ id }).exec();
   }
 
   async update(
-    id: string,
+    id: number,
     updatePositionDto: UpdatePositionDto,
   ): Promise<Position | null> {
     return this.positionModel
-      .findByIdAndUpdate({ _id: id }, updatePositionDto, { new: true })
+      .findByIdAndUpdate({ id }, updatePositionDto, { new: true })
       .exec();
   }
 
-  async delete(id: string): Promise<Position | null> {
+  async delete(id: number): Promise<Position | null> {
     const deletedPosition = await this.positionModel
-      .findByIdAndDelete({ _id: id })
+      .findByIdAndDelete({ id })
       .exec();
     return deletedPosition;
   }

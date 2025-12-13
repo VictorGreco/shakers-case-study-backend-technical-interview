@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ProjectLeadersController } from './projectLeaders.controller';
+import { ProjectLeadersControllerV1 } from './projectLeaders.controller';
 import { ProjectLeadersService } from './projectLeaders.service';
 import {
   ProjectLeader,
@@ -13,7 +13,7 @@ import {
       { name: ProjectLeader.name, schema: ProjectLeaderSchema },
     ]),
   ],
-  controllers: [ProjectLeadersController],
+  controllers: [ProjectLeadersControllerV1],
   providers: [ProjectLeadersService],
 })
 export class ProjectLeadersModule {}

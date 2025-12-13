@@ -22,22 +22,22 @@ export class IndustriesService {
     return this.industrieModel.find().exec();
   }
 
-  async findOne(id: string): Promise<Industrie | null> {
-    return this.industrieModel.findOne({ _id: id }).exec();
+  async findOne(id: number): Promise<Industrie | null> {
+    return this.industrieModel.findOne({ id }).exec();
   }
 
   async update(
-    id: string,
+    id: number,
     updateIndustrieDto: UpdateIndustrieDto,
   ): Promise<Industrie | null> {
     return this.industrieModel
-      .findByIdAndUpdate({ _id: id }, updateIndustrieDto, { new: true })
+      .findByIdAndUpdate({ id }, updateIndustrieDto, { new: true })
       .exec();
   }
 
-  async delete(id: string): Promise<Industrie | null> {
+  async delete(id: number): Promise<Industrie | null> {
     const deletedIndustrie = await this.industrieModel
-      .findByIdAndDelete({ _id: id })
+      .findByIdAndDelete({ id })
       .exec();
     return deletedIndustrie;
   }

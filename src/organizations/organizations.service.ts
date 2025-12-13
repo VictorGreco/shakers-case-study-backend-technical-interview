@@ -25,22 +25,22 @@ export class OrganizationsService {
     return this.organizationModel.find().exec();
   }
 
-  async findOne(id: string): Promise<Organization | null> {
-    return this.organizationModel.findOne({ _id: id }).exec();
+  async findOne(id: number): Promise<Organization | null> {
+    return this.organizationModel.findOne({ id }).exec();
   }
 
   async update(
-    id: string,
+    id: number,
     updateOrganizationDto: UpdateOrganizationDto,
   ): Promise<Organization | null> {
     return this.organizationModel
-      .findByIdAndUpdate({ _id: id }, updateOrganizationDto, { new: true })
+      .findByIdAndUpdate({ id }, updateOrganizationDto, { new: true })
       .exec();
   }
 
-  async delete(id: string): Promise<Organization | null> {
+  async delete(id: number): Promise<Organization | null> {
     const deletedOrganization = await this.organizationModel
-      .findByIdAndDelete({ _id: id })
+      .findByIdAndDelete({ id })
       .exec();
     return deletedOrganization;
   }

@@ -20,23 +20,21 @@ export class SkillsService {
     return this.skillModel.find().exec();
   }
 
-  async findOne(id: string): Promise<Skill | null> {
-    return this.skillModel.findOne({ _id: id }).exec();
+  async findOne(id: number): Promise<Skill | null> {
+    return this.skillModel.findOne({ id }).exec();
   }
 
   async update(
-    id: string,
+    id: number,
     updateSkillDto: UpdateSkillDto,
   ): Promise<Skill | null> {
     return this.skillModel
-      .findByIdAndUpdate({ _id: id }, updateSkillDto, { new: true })
+      .findByIdAndUpdate({ id }, updateSkillDto, { new: true })
       .exec();
   }
 
-  async delete(id: string): Promise<Skill | null> {
-    const deletedSkill = await this.skillModel
-      .findByIdAndDelete({ _id: id })
-      .exec();
+  async delete(id: number): Promise<Skill | null> {
+    const deletedSkill = await this.skillModel.findByIdAndDelete({ id }).exec();
     return deletedSkill;
   }
 }

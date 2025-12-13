@@ -4,8 +4,11 @@ import { CreateCategorieDto } from './dto/create-categorie.dto';
 import { UpdateCategorieDto } from './dto/update-categorie.dto';
 import { Categorie } from './schemas/categorie.schema';
 
-@Controller('categories')
-export class CategoriesController {
+@Controller({
+  path: 'categories',
+  version: '1',
+})
+export class CategoriesControllerV1 {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Post()
@@ -19,20 +22,20 @@ export class CategoriesController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Categorie | null> {
+  async findOne(@Param('id') id: number): Promise<Categorie | null> {
     return this.categoriesService.findOne(id);
   }
 
   @Post(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() updateCategorieDto: UpdateCategorieDto,
   ) {
     return this.categoriesService.update(id, updateCategorieDto);
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string) {
+  async delete(@Param('id') id: number) {
     return this.categoriesService.delete(id);
   }
 }

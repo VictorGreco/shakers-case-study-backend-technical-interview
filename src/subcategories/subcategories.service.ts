@@ -25,22 +25,22 @@ export class SubcategoriesService {
     return this.categorieModel.find().exec();
   }
 
-  async findOne(id: string): Promise<Subcategorie | null> {
-    return this.categorieModel.findOne({ _id: id }).exec();
+  async findOne(id: number): Promise<Subcategorie | null> {
+    return this.categorieModel.findOne({ id }).exec();
   }
 
   async update(
-    id: string,
+    id: number,
     updateSubcategorieDto: UpdateSubcategorieDto,
   ): Promise<Subcategorie | null> {
     return this.categorieModel
-      .findByIdAndUpdate({ _id: id }, updateSubcategorieDto, { new: true })
+      .findByIdAndUpdate({ id }, updateSubcategorieDto, { new: true })
       .exec();
   }
 
-  async delete(id: string): Promise<Subcategorie | null> {
+  async delete(id: number): Promise<Subcategorie | null> {
     const deletedCategorie = await this.categorieModel
-      .findByIdAndDelete({ _id: id })
+      .findByIdAndDelete({ id })
       .exec();
     return deletedCategorie;
   }

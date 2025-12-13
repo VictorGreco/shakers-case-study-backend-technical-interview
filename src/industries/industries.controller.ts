@@ -4,8 +4,11 @@ import { CreateIndustrieDto } from './dto/create-industrie.dto';
 import { UpdateIndustrieDto } from './dto/update-industrie.dto';
 import { Industrie } from './schemas/industrie.schema';
 
-@Controller('industries')
-export class IndustriesController {
+@Controller({
+  path: 'industries',
+  version: '1',
+})
+export class IndustriesControllerV1 {
   constructor(private readonly industriesService: IndustriesService) {}
 
   @Post()
@@ -19,20 +22,20 @@ export class IndustriesController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Industrie | null> {
+  async findOne(@Param('id') id: number): Promise<Industrie | null> {
     return this.industriesService.findOne(id);
   }
 
   @Post(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() updateIndustrieDto: UpdateIndustrieDto,
   ) {
     return this.industriesService.update(id, updateIndustrieDto);
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string) {
+  async delete(@Param('id') id: number) {
     return this.industriesService.delete(id);
   }
 }

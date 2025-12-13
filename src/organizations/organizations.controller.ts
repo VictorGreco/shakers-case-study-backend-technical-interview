@@ -4,8 +4,11 @@ import { CreateOrganizationDto } from './dto/create-organization.dto';
 import { UpdateOrganizationDto } from './dto/update-organization.dto';
 import { Organization } from './schemas/organization.schema';
 
-@Controller('organizations')
-export class OrganizationsController {
+@Controller({
+  path: 'organizations',
+  version: '1',
+})
+export class OrganizationsControllerV1 {
   constructor(private readonly organizationsService: OrganizationsService) {}
 
   @Post()
@@ -19,20 +22,20 @@ export class OrganizationsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Organization | null> {
+  async findOne(@Param('id') id: number): Promise<Organization | null> {
     return this.organizationsService.findOne(id);
   }
 
   @Post(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() updateOrganizationDto: UpdateOrganizationDto,
   ) {
     return this.organizationsService.update(id, updateOrganizationDto);
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string) {
+  async delete(@Param('id') id: number) {
     return this.organizationsService.delete(id);
   }
 }

@@ -21,22 +21,22 @@ export class ProjectsService {
     return this.projectModel.find().exec();
   }
 
-  async findOne(id: string): Promise<Project | null> {
-    return this.projectModel.findOne({ _id: id }).exec();
+  async findOne(id: number): Promise<Project | null> {
+    return this.projectModel.findOne({ id }).exec();
   }
 
   async update(
-    id: string,
+    id: number,
     updateProjectDto: UpdateProjectDto,
   ): Promise<Project | null> {
     return this.projectModel
-      .findByIdAndUpdate({ _id: id }, updateProjectDto, { new: true })
+      .findByIdAndUpdate({ id }, updateProjectDto, { new: true })
       .exec();
   }
 
-  async delete(id: string): Promise<Project | null> {
+  async delete(id: number): Promise<Project | null> {
     const deletedProject = await this.projectModel
-      .findByIdAndDelete({ _id: id })
+      .findByIdAndDelete({ id })
       .exec();
     return deletedProject;
   }

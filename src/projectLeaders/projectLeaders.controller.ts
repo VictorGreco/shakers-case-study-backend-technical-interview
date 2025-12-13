@@ -4,8 +4,11 @@ import { CreateProjectLeaderDto } from './dto/create-projectLeader.dto';
 import { UpdateProjectLeaderDto } from './dto/update-projectLeader.dto';
 import { ProjectLeader } from './schemas/projectLeader.schema';
 
-@Controller('projectLeaders')
-export class ProjectLeadersController {
+@Controller({
+  path: 'projectLeaders',
+  version: '1',
+})
+export class ProjectLeadersControllerV1 {
   constructor(private readonly projectLeadersService: ProjectLeadersService) {}
 
   @Post()
@@ -19,20 +22,20 @@ export class ProjectLeadersController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<ProjectLeader | null> {
+  async findOne(@Param('id') id: number): Promise<ProjectLeader | null> {
     return this.projectLeadersService.findOne(id);
   }
 
   @Post(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() updateProjectLeaderDto: UpdateProjectLeaderDto,
   ) {
     return this.projectLeadersService.update(id, updateProjectLeaderDto);
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string) {
+  async delete(@Param('id') id: number) {
     return this.projectLeadersService.delete(id);
   }
 }
