@@ -6,8 +6,7 @@ import helmet from 'helmet';
 
 /* TODOS:
 - Add CSRF
-- Add Unit testing and e2e
-- Add authentication and authorization token via JWT
+- Add login and auth to tests
 */
 
 async function bootstrap() {
