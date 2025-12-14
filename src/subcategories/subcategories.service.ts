@@ -9,18 +9,18 @@ export class SubcategoriesService {
 
   constructor(
     @InjectModel(Subcategorie.name)
-    private readonly categorieModel: Model<Subcategorie>,
+    private readonly subcategorieModel: Model<Subcategorie>,
   ) {}
 
   async findAll(): Promise<Subcategorie[]> {
     this.logger.log('Called find all');
 
-    return this.categorieModel.find().exec();
+    return this.subcategorieModel.find().exec();
   }
 
   async findOne(id: number): Promise<Subcategorie | null> {
     this.logger.log('Called find single');
 
-    return this.categorieModel.findOne({ id }).exec();
+    return this.subcategorieModel.findOne({ id }).exec();
   }
 }
